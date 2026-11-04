@@ -1,0 +1,47 @@
+# Central pipeline configuration. Values here are not secrets.
+# Secrets (API keys, passwords) live in .env.
+
+project:
+  name: mortgage-delinquency-stress-test
+  # Origination years (vintages) to include. Covers pre-crisis,
+  # the 2008 crisis, the recovery, and COVID.
+  vintage_start: 2005
+  vintage_end: 2022
+
+s3:
+  bronze_prefix: bronze
+  silver_prefix: silver
+  gold_prefix: gold
+
+freddie_mac:
+  # Folder where you place the sample zip files downloaded by hand
+  # from the Freddie Mac Single-Family Loan-Level Dataset site.
+  local_dir: data/bronze/freddie_mac
+  # Expected files: sample_YYYY.zip containing
+  # sample_orig_YYYY.txt (origination) and sample_svcg_YYYY.txt (performance)
+
+fred:
+  observation_start: "2000-01-01"
+  # National macro series
+  national_series:
+    UNRATE: Unemployment rate, monthly, seasonally adjusted
+    MORTGAGE30US: 30-year fixed mortgage rate, weekly
+    USSTHPI: FHFA all-transactions house price index, quarterly
+    FEDFUNDS: Effective federal funds rate, monthly
+    CPIAUCSL: Consumer price index, monthly
+    GDPC1: Real gross domestic product, quarterly
+    USREC: NBER recession indicator, monthly
+  # State-level series. {state} is replaced by the two-letter code.
+  state_series_templates:
+    "{state}UR": State unemployment rate, monthly
+    "{state}STHPI": FHFA state house price index, quarterly
+  states: [AL, AK, AZ, AR, CA, CO, CT, DE, DC, FL, GA, HI, ID, IL, IN, IA,
+           KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM,
+           NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA,
+           WV, WI, WY]
+
+target:
+  # Fixed in Week 2. Do not change after modeling starts.
+  definition: "Loan becomes 90+ days delinquent within 24 months of first payment"
+  horizon_months: 24
+  delinquency_threshold: 3   # Freddie Mac status code 3 = 90-119 days delinquent
