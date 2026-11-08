@@ -1,0 +1,1 @@
+the date, release 2026Q2 (performance through June 30, 2026), 18 vintages (2005–2022), 36 files, about 56 million performance rows, and the file-name issue the dry run caught.

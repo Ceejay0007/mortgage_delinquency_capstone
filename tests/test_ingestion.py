@@ -5,6 +5,8 @@ from pathlib import Path
 from ingestion.freddie_mac_ingestion import classify_member, find_zips
 from ingestion.fred_ingestion import series_list
 
+def test_classify_member_new_perf_name():
+    assert classify_member("sample_perf_2005.txt") == ("performance", "2005")
 
 def test_classify_member_origination():
     assert classify_member("sample_orig_2008.txt") == ("origination", "2008")

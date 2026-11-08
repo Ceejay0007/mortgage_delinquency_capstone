@@ -2,17 +2,17 @@
 
 Freddie Mac's dataset requires a login, so the zip files are downloaded
 by hand once (see README, Step 1). This script then handles everything
-repeatable: validation, checksums, and idempotent upload to S3.
+repeatable. validation, checksums, and idempotent upload to S3.
 
-Files are unzipped and stored unchanged, partitioned by vintage year:
-    s3://<bucket>/bronze/freddie_mac/origination/vintage=<YYYY>/sample_orig_<YYYY>.txt
-    s3://<bucket>/bronze/freddie_mac/performance/vintage=<YYYY>/sample_svcg_<YYYY>.txt
+Files are unzipped and stored unchanged, partitioned by release and vintage year:
+    s3://<bucket>/bronze/freddie_mac/release=<YYYYQn>/origination/vintage=<YYYY>/sample_orig_<YYYY>.txt
+    s3://<bucket>/bronze/freddie_mac/release=<YYYYQn>/performance/vintage=<YYYY>/sample_svcg_<YYYY>.txt
 
-Re-running is safe: a file already in S3 with the same checksum is skipped.
+Re running is safe: a file already in S3 with the same checksum is skipped.
 
 Usage:
-    python -m ingestion.freddie_mac_ingestion
-    python -m ingestion.freddie_mac_ingestion --dry-run
+    python -m ingestion.freddie_mac_ingestion --release 2026Q2 --dry-run
+    python -m ingestion.freddie_mac_ingestion --release 2026Q2
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ log = get_logger("freddie_mac_ingest")
 ZIP_PATTERN = re.compile(r"^sample_(\d{4})\.zip$")
 MEMBER_PATTERNS = {
     "origination": re.compile(r"^sample_orig_(\d{4})\.txt$"),
-    "performance": re.compile(r"^sample_svcg_(\d{4})\.txt$"),
+    "performance": re.compile(r"^sample_(?:svcg|perf)_(\d{4})\.txt$"),
 }
 
 
@@ -93,7 +93,10 @@ def upload_if_changed(s3, bucket: str, key: str, path: Path, dry_run: bool) -> s
 def main() -> None:
     parser = argparse.ArgumentParser(description="Upload Freddie Mac sample files to Bronze.")
     parser.add_argument("--dry-run", action="store_true", help="Validate and report without uploading")
+    parser.add_argument("--release", required=True, help="Freddie Mac release label, e.g. 2026Q2")
     args = parser.parse_args()
+    if not re.match(r"^\d{4}Q[1-4]$", args.release):
+        raise SystemExit("Release must look like 2026Q2")
 
     cfg = load_config()
     local_dir = PROJECT_ROOT / cfg["freddie_mac"]["local_dir"]
@@ -118,7 +121,7 @@ def main() -> None:
                 dataset, vintage = info
                 extracted = Path(zf.extract(member, tmp))
                 rows = validate_pipe_file(extracted)
-                key = f"{prefix}/freddie_mac/{dataset}/vintage={vintage}/{extracted.name}"
+                key = f"{prefix}/freddie_mac/release={args.release}/{dataset}/vintage={vintage}/{extracted.name}"
                 status = upload_if_changed(s3, bucket, key, extracted, args.dry_run)
                 log.info("%s %-11s %9d rows  %s", vintage, dataset, rows, status)
 
