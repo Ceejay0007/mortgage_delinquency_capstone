@@ -88,12 +88,16 @@ Federal Reserve Bank of St. Louis.
 ## Setup
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+## Setup
+
+```bash
+conda create -n capstone python=3.11 -y
+conda activate capstone
 pip install -r requirements.txt
-cp .env.example .env               # then fill in your values
-pytest -q                          # confirm everything imports and passes
-```
+conda install -c conda-forge openjdk=17 -y   # Java, required to run Spark locally
+cp .env.example .env                          # then fill in your values
+pytest -q                                     # confirm everything imports and passes
+```                        
 
 ## Step 1: Bronze ingestion
 
