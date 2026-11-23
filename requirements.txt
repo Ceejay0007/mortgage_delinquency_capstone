@@ -4,6 +4,8 @@ pyyaml>=6.0
 requests>=2.31
 pandas>=2.2
 pyarrow>=15.0
+# Local Spark testing (AWS Glue already includes Spark; this is for your laptop)
+pyspark==3.5.3
 
 # AWS
 boto3>=1.34
