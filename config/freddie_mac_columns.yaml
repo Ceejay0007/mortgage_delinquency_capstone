@@ -1,0 +1,270 @@
+# Freddie Mac Single Family Loan Level Dataset column definitions.
+# Generated from the July 2026 File Layout. Used by profiling notebooks and the Silver job.
+source: Freddie Mac SFLLD File Layout, July 2026 (Release 47)
+note: Column order matches field position. Files are pipe-delimited with no header row.
+origination:
+- position: 1
+  name: credit_score
+  freddie_name: Classic FICO®
+  type: Numeric
+- position: 2
+  name: first_payment_date
+  freddie_name: First Payment Date
+  type: Date
+- position: 3
+  name: first_time_homebuyer_flag
+  freddie_name: First Time Homebuyer Indicator
+  type: Alpha
+- position: 4
+  name: maturity_date
+  freddie_name: Maturity Date
+  type: Date
+- position: 5
+  name: msa
+  freddie_name: Metropolitan Statistical Area (MSA) Or Metropolitan Division
+  type: Numeric
+- position: 6
+  name: mi_pct
+  freddie_name: Mortgage Insurance Percentage (MI %)
+  type: Numeric
+- position: 7
+  name: num_units
+  freddie_name: Number of Units
+  type: Numeric
+- position: 8
+  name: occupancy_status
+  freddie_name: Occupancy Status
+  type: Alpha
+- position: 9
+  name: orig_cltv
+  freddie_name: Original Combined Loan-to-Value (CLTV)
+  type: Numeric
+- position: 10
+  name: orig_dti
+  freddie_name: Original Debt-to-Income (DTI) Ratio
+  type: Numeric
+- position: 11
+  name: orig_upb
+  freddie_name: Original UPB
+  type: Numeric
+- position: 12
+  name: orig_ltv
+  freddie_name: Original Loan-to-Value (LTV)
+  type: Numeric
+- position: 13
+  name: orig_interest_rate
+  freddie_name: Original Interest Rate
+  type: Numeric - 6,3
+- position: 14
+  name: channel
+  freddie_name: Channel
+  type: Alpha
+- position: 15
+  name: prepayment_penalty_flag
+  freddie_name: Prepayment Penalty Indicator
+  type: Alpha
+- position: 16
+  name: amortization_type
+  freddie_name: Amortization Type
+  type: Alpha
+- position: 17
+  name: property_state
+  freddie_name: Property State
+  type: Alpha
+- position: 18
+  name: property_type
+  freddie_name: Property Type
+  type: Alpha
+- position: 19
+  name: postal_code
+  freddie_name: Postal Code
+  type: Alpha
+- position: 20
+  name: loan_id
+  freddie_name: Loan Identifier
+  type: Alpha Numeric - PYYQnXXXXXXX
+- position: 21
+  name: loan_purpose
+  freddie_name: Loan Purpose
+  type: Alpha
+- position: 22
+  name: orig_loan_term
+  freddie_name: Original Loan Term
+  type: Numeric
+- position: 23
+  name: num_borrowers
+  freddie_name: Number of Borrowers
+  type: Numeric
+- position: 24
+  name: seller_name
+  freddie_name: Seller Name
+  type: Alpha Numeric
+- position: 25
+  name: super_conforming_flag
+  freddie_name: Super Conforming Flag
+  type: Alpha
+- position: 26
+  name: pre_harp_loan_id
+  freddie_name: Pre-HARP Loan Sequence Number
+  type: Alpha Numeric - PYYQnXXXXXXX
+- position: 27
+  name: special_eligibility_program
+  freddie_name: Special Eligibility Program
+  type: Alpha Numeric
+- position: 28
+  name: harp_indicator
+  freddie_name: HARP Indicator
+  type: Alpha
+- position: 29
+  name: property_valuation_method
+  freddie_name: Property Valuation Method
+  type: Numeric
+- position: 30
+  name: interest_only_flag
+  freddie_name: Interest Only (I/O) Indicator
+  type: Alpha
+- position: 31
+  name: vantage_score
+  freddie_name: VantageScore® 4.0
+  type: Numeric
+performance:
+- position: 1
+  name: loan_id
+  freddie_name: Loan Identifier
+  type: Alpha Numeric - PYYQnXXXXXXX
+- position: 2
+  name: period
+  freddie_name: Period
+  type: Date
+- position: 3
+  name: current_upb
+  freddie_name: Current Actual UPB
+  type: Numeric - 12,2
+- position: 4
+  name: delinquency_status
+  freddie_name: Current Loan Delinquency Status
+  type: Alpha Numeric
+- position: 5
+  name: loan_age
+  freddie_name: Loan Age
+  type: Numeric
+- position: 6
+  name: remaining_months
+  freddie_name: Remaining Months to Legal Maturity
+  type: Numeric
+- position: 7
+  name: defect_settlement_date
+  freddie_name: Underwriting Defect and Major Servicing Defect Settlement Date
+  type: Date
+- position: 8
+  name: modification_flag
+  freddie_name: Modification Flag
+  type: Alpha
+- position: 9
+  name: zero_balance_code
+  freddie_name: Zero Balance Code
+  type: Numeric
+- position: 10
+  name: zero_balance_date
+  freddie_name: Zero Balance Effective Date
+  type: Date
+- position: 11
+  name: current_interest_rate
+  freddie_name: Current Interest Rate
+  type: Numeric - 8,3
+- position: 12
+  name: non_interest_bearing_upb
+  freddie_name: Current Non-Interest Bearing UPB
+  type: Numeric
+- position: 13
+  name: last_paid_installment_date
+  freddie_name: Due Date of Last Paid Installment (DDLPI)
+  type: Date
+- position: 14
+  name: mi_recoveries
+  freddie_name: MI Recoveries
+  type: Numeric - 12,2
+- position: 15
+  name: net_sales_proceeds
+  freddie_name: Net Sales Proceeds
+  type: Numeric - 12,2
+- position: 16
+  name: non_mi_recoveries
+  freddie_name: Non MI Recoveries
+  type: Numeric - 12,2
+- position: 17
+  name: total_expenses
+  freddie_name: Total Expenses
+  type: Numeric - 12,2
+- position: 18
+  name: legal_costs
+  freddie_name: Legal Costs
+  type: Numeric - 12,2
+- position: 19
+  name: maintenance_costs
+  freddie_name: Maintenance and Preservation Costs
+  type: Numeric - 12,2
+- position: 20
+  name: taxes_insurance
+  freddie_name: Taxes and Insurance
+  type: Numeric - 12,2
+- position: 21
+  name: misc_expenses
+  freddie_name: Miscellaneous Expenses
+  type: Numeric - 12,2
+- position: 22
+  name: actual_loss
+  freddie_name: Actual Loss
+  type: Numeric - 12,2
+- position: 23
+  name: cumulative_mod_costs
+  freddie_name: Cumulative Modification Costs
+  type: Numeric - 12,2
+- position: 24
+  name: step_rate_flag
+  freddie_name: Interest Rate Step Indicator
+  type: Alpha
+- position: 25
+  name: payment_deferral_flag
+  freddie_name: Payment Deferral Flag
+  type: Alpha
+- position: 26
+  name: estimated_ltv
+  freddie_name: Estimated Loan-to-Value (ELTV)
+  type: Numeric
+- position: 27
+  name: zero_balance_removal_upb
+  freddie_name: Zero Balance Removal UPB
+  type: Numeric - 12,2
+- position: 28
+  name: delinquent_accrued_interest
+  freddie_name: Delinquent Accrued Interest
+  type: Numeric - 12,2
+- position: 29
+  name: disaster_delinquency_flag
+  freddie_name: Delinquency Due to Disaster
+  type: Alpha
+- position: 30
+  name: borrower_assistance_plan
+  freddie_name: Borrower Assistance Plan
+  type: Alpha
+- position: 31
+  name: current_period_mod_costs
+  freddie_name: Current Period Modification Costs
+  type: Numeric - 12,2
+- position: 32
+  name: interest_bearing_upb
+  freddie_name: Current Interest Bearing UPB
+  type: Numeric - 12,2
+- position: 33
+  name: mi_cancellation_flag
+  freddie_name: Mortgage Insurance Cancellation Indicator
+  type: Alpha
+- position: 34
+  name: servicer_name
+  freddie_name: Servicer Name
+  type: Alpha Numeric
+- position: 35
+  name: bankruptcy_cramdown_costs
+  freddie_name: Bankruptcy Cramdown Costs
+  type: Numeric - 12,2
